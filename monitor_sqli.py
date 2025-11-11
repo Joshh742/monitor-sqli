@@ -13,7 +13,7 @@ LOG_FILE_SQLI = "/var/www/html/unkpresent/logs/sqli_attempts.log"
 
 # Inisialisasi API
 genai.configure(api_key=GEMINI_API_KEY)
-gemini_model = genai.GenerativeModel('gemini-1.5-flash')
+gemini_model = genai.GenerativeModel('gemini-pro')
 
 def get_gemini_analysis(prompt):
     """Mendapatkan analisis cerdas dari Gemini."""
