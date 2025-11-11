@@ -3,9 +3,9 @@ import google.generativeai as genai
 import os
 
 # --- GANTI INI DENGAN DATA ANDA ---
-GEMINI_API_KEY = "API_KEY_GEMINI_ANDA_YANG_VALID"
-FONNTE_TOKEN = "TOKEN_FONNTE_ANDA"
-NOMOR_WA_ADMIN = "NOMOR_WA_ANDA" # (Pastikan ini juga benar)
+GEMINI_API_KEY = "AIzaSyB_piNVX4sihYS8vPQ4OdJeVX00t746dMU"
+FONNTE_TOKEN = "ThMoZ8cPqp8wEQcrMo1x"
+NOMOR_WA_ADMIN = "6287775769005" # (Pastikan ini juga benar)
 # -----------------------------------
 
 # Path log yang sudah benar
