@@ -11,7 +11,9 @@ LOG_FILE_SQLI = "/var/www/html/unkpresent/logs/sqli_attempts.log"
 genai.configure(api_key=GEMINI_API_KEY)
 gemini_model = genai.GenerativeModel('models/gemini-flash-latest')
 
+
 def get_gemini_analysis(prompt):
+    """Mendapatkan analisis cerdas dari Gemini."""
     try:
         response = gemini_model.generate_content(prompt)
         return response.text
@@ -19,6 +21,7 @@ def get_gemini_analysis(prompt):
         return f"Analisis Gemini gagal: {e}"
 
 def send_whatsapp_notification(message):
+    """Mengirim notifikasi via Fonnte."""
     print(f"Mengirim notifikasi: {message[:50]}...")
     try:
         requests.post(
@@ -29,7 +32,6 @@ def send_whatsapp_notification(message):
     except Exception as e:
         print(f"Gagal kirim Fonnte: {e}")
 
-# ALUR UTAMA 
 def check_sqli_logs():
     print("Mengecek log SQLi (sqli_attempts.log)...")
     
@@ -46,16 +48,17 @@ def check_sqli_logs():
         for entry in log_entries:
             print(f"DETEKSI SQLi: {entry.strip()}")
             
-            prompt_sqli = f"Berikan analisis super singkat (masing-masing 1 kalimat) untuk payload SQLi ini: '{entry.strip()}'. Jelaskan bahayanya DAN solusi pencegahannya."
+            # PROMPT Gemini
+            prompt_sqli = f"Berikan analisis super singkat (masing-masing 1 kalimat) untuk payload SQLi ini: '{entry.strip()}'. Jelaskan bahayanya DAN solusi pencegahannya. PENTING: Jangan gunakan markdown, bintang (*), atau emoji dalam respons Anda."
             
             analysis = get_gemini_analysis(prompt_sqli)
             
             message = f"""
-🚨 *ALERT SQL INJECTION* 🚨
+ALERT SQL INJECTION
 
-*Log:* {entry.strip()}
+Log: {entry.strip()}
 
-*Analisis & Solusi Gemini:*
+Analisis & Solusi Gemini:
 {analysis}
 """
             
