@@ -3,7 +3,7 @@ import google.generativeai as genai
 import os
 
 # --- GANTI INI DENGAN DATA ANDA ---
-GEMINI_API_KEY = "API_KEY_GEMINI_ANDA"
+GEMINI_API_KEY = "AIzaSyAt9DU9JKh8eSnVhc1s6r5vKNLWUgUU2zU"
 FONNTE_TOKEN = "ThMoZ8cPqp8wEQcrMo1x"
 NOMOR_WA_ADMIN = "6287775769005" # Nomor WA Anda
 # -----------------------------------
