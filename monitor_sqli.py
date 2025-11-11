@@ -4,8 +4,8 @@ import os
 
 # --- GANTI INI DENGAN DATA ANDA ---
 GEMINI_API_KEY = "API_KEY_GEMINI_ANDA"
-FONNTE_TOKEN = "TOKEN_FONNTE_ANDA"
-NOMOR_WA_ADMIN = "6281234567890" # Nomor WA Anda
+FONNTE_TOKEN = "ThMoZ8cPqp8wEQcrMo1x"
+NOMOR_WA_ADMIN = "6287775769005" # Nomor WA Anda
 # -----------------------------------
 
 # File log yang akan kita pantau
