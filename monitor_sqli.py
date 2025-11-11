@@ -3,9 +3,9 @@ import google.generativeai as genai
 import os
 
 # --- GANTI INI DENGAN DATA ANDA ---
-GEMINI_API_KEY = "AIzaSyB_piNVX4sihYS8vPQ4OdJeVX00t746dMU"
-FONNTE_TOKEN = "ThMoZ8cPqp8wEQcrMo1x"
-NOMOR_WA_ADMIN = "6287775769005" # Nomor WA Anda
+GEMINI_API_KEY = "API_KEY_GEMINI_ANDA_YANG_VALID"
+FONNTE_TOKEN = "TOKEN_FONNTE_ANDA"
+NOMOR_WA_ADMIN = "NOMOR_WA_ANDA" # (Pastikan ini juga benar)
 # -----------------------------------
 
 # Path log yang sudah benar
@@ -13,11 +13,8 @@ LOG_FILE_SQLI = "/var/www/html/unkpresent/logs/sqli_attempts.log"
 
 # Inisialisasi API
 genai.configure(api_key=GEMINI_API_KEY)
-
-# ### INI PERUBAHAN PENTINGNYA ###
-# Kita gunakan nama model yang PASTI ADA dari hasil pencarian Anda
+# Kita gunakan model yang sudah Anda temukan
 gemini_model = genai.GenerativeModel('models/gemini-flash-latest')
-# #################################
 
 
 def get_gemini_analysis(prompt):
@@ -26,7 +23,6 @@ def get_gemini_analysis(prompt):
         response = gemini_model.generate_content(prompt)
         return response.text
     except Exception as e:
-        # Kita tambahkan detail error agar lebih jelas
         return f"Analisis Gemini gagal: {e}"
 
 def send_whatsapp_notification(message):
@@ -58,11 +54,21 @@ def check_sqli_logs():
         for entry in log_entries:
             print(f"DETEKSI SQLi: {entry.strip()}")
             
-            prompt_sqli = f"WAF mendeteksi percobaan SQL Injection: '{entry.strip()}'. Analisis bahaya payload ini & beri rekomendasi."
+            # ### PERUBAHAN 1: PROMPT GEMINI DIBUAT SINGKAT ###
+            # Kita minta Gemini untuk penjelasan 1 kalimat.
+            prompt_sqli = f"Jelaskan bahaya payload SQLi ini dalam 1 kalimat singkat: '{entry.strip()}'"
             
             analysis = get_gemini_analysis(prompt_sqli)
             
-            message = f"🚨 *ALERT SQL INJECTION* 🚨\n\nLog: {entry.strip()}\n\nAnalisis Gemini:\n{analysis}"
+            # ### PERUBAHAN 2: PESAN WHATSAPP DIBUAT SINGKAT ###
+            message = f"""
+🚨 *ALERT SQL INJECTION* 🚨
+
+*Log:* {entry.strip()}
+
+*Analisis Gemini:*
+{analysis}
+"""
             
             send_whatsapp_notification(message)
             
