@@ -9,7 +9,7 @@ NOMOR_WA_ADMIN = "6287775769005" # Nomor WA Anda
 # -----------------------------------
 
 # File log yang akan kita pantau
-LOG_FILE_SQLI = "/var/log/sqli_attempts.log"
+LOG_FILE_SQLI = "/var/www/html/unkpresent/logs/sqli_attempts.log"
 
 # Inisialisasi API
 genai.configure(api_key=GEMINI_API_KEY)
